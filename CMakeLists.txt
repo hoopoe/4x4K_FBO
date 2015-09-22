@@ -21,7 +21,7 @@ include_directories(${Qt5Widgets_INCLUDE_DIRS})
 #VL
 set( CMAKE_MODULE_PATH "${3DPARTY_DIR}/VL/install/cmake" )
 set(VL_ROOT "${3DPARTY_DIR}/VL/install")
-find_package(VL COMPONENTS VLCore VLGraphics REQUIRED)
+find_package(VL COMPONENTS VLCore VLGraphics VLQt5 ZLib FreeType JPG PNG TIFF REQUIRED)
 include_directories(${VL_INCLUDE_DIRS})
 
 set(QT_LIBRARIES
