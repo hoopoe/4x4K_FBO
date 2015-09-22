@@ -1,0 +1,3 @@
+[submodule "3dparty/VL"]
+	path = 3dparty/VL
+	url = git@github.com:hoopoe/Visualization-Library.git
