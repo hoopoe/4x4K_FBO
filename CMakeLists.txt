@@ -1,15 +1,14 @@
 project(4x4K_FBO)
 
 cmake_minimum_required(VERSION 2.8)
+SET( 3DPARTY_DIR "${CMAKE_SOURCE_DIR}/3dparty" )
 SET( CMAKE_AUTOMOC ON )
 
 include_directories( "src" )
 
-
 # OpenGL
 find_package(OpenGL REQUIRED)
-set(VL_OPENGL_LIBRARIES ${OPENGL_LIBRARIES})
-
+#set(VL_OPENGL_LIBRARIES ${OPENGL_LIBRARIES})
 
 # Qt5
 find_package(Qt5Core REQUIRED)
@@ -18,6 +17,12 @@ find_package(Qt5Widgets REQUIRED)
 include_directories(${Qt5Core_INCLUDE_DIRS})
 include_directories(${Qt5OpenGL_INCLUDE_DIRS})
 include_directories(${Qt5Widgets_INCLUDE_DIRS})
+
+#VL
+set( CMAKE_MODULE_PATH "${3DPARTY_DIR}/VL/install/cmake" )
+set(VL_ROOT "${3DPARTY_DIR}/VL/install")
+find_package(VL COMPONENTS VLCore VLGraphics REQUIRED)
+include_directories(${VL_INCLUDE_DIRS})
 
 set(QT_LIBRARIES
         ${Qt5Core_LIBRARIES}
