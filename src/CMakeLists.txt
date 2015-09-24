@@ -1,6 +1,6 @@
 set(
     4x4K_FBO_HPP_SRCS
-    rotatingcube.hpp
+    rtt.hpp
 )
 
 set(
@@ -18,6 +18,9 @@ set(
 #    4x4K_FBO_Ui_SRCS
 #    mainwindow.ui
 #)
+
+add_definitions(-DVL_STATIC_LINKING)
+#add_definitions(-DNDEBUG)
 
 add_executable(4x4K_FBO WIN32 ${4x4K_FBO_SRCS} ${4x4K_FBO_HEADERS} ${4x4K_FBO_HPP_SRCS})
 

@@ -2,9 +2,7 @@
 #include <QApplication>
 #include <vlCore/VisualizationLibrary.hpp>
 #include <vlQt5/Qt5Widget.hpp>
-
-//#include "mainwindow.h"
-#include "rotatingcube.hpp"
+#include "rtt.hpp"
 
 using namespace std;
 using namespace vl;
@@ -12,10 +10,6 @@ using namespace vlQt5;
 
 int main(int argc, char *argv[])
 {
-//    QApplication app(argc, argv);
-//    MainWindow w;
-//    w.show();
-//    return app.exec();
     QApplication app(argc, argv);
 
     /* init Visualization Library */
@@ -28,11 +22,16 @@ int main(int argc, char *argv[])
     format.setDepthBufferBits(24);
     format.setStencilBufferBits(8);
     format.setFullscreen(false);
+    format.setVSync(true);
     //format.setMultisampleSamples(16);
     //format.setMultisample(true);
 
     /* create the applet to be run */
-    ref<Applet> applet = new App_RotatingCube;
+    //Ultra HD 3840 × 2160
+    int rttWidth = 1920 * 2;
+    int rttHeight = 1080 * 2;
+    ref<Applet> applet = new RTT(rttWidth, rttHeight);
+    applet->setAppletName("RTT Test");
     applet->initialize();
     /* create a native Qt5 window */
     ref<vlQt5::Qt5Widget> qt5_window = new vlQt5::Qt5Widget;
@@ -49,11 +48,22 @@ int main(int argc, char *argv[])
     mat4 view_mat = mat4::getLookAt(eye, center, up);
     applet->rendering()->as<Rendering>()->camera()->setViewMatrix( view_mat );
     /* Initialize the OpenGL context and window properties */
-    int x = 10;
-    int y = 10;
-    int width = 512;
-    int height= 512;
-    qt5_window->initQt5Widget( "Visualization Library on Qt5 - Rotating Cube", format, NULL, x, y, width, height );
+    int x = 0;
+    int y = 0;
+//    int width = 512;
+//    int height= 512;
+    int width = rttWidth;
+    int height= rttHeight;
+    qt5_window->initQt5Widget( "Visualization Library on Qt5 - RTT Test", format, NULL, x, y, width, height );
+//    qt5_window->setContinuousUpdate(false);
+
+    // hack for windows to set flag WS_POPUP of the window style and reset flags of ExStyle
+//    HWND hwndId = (HWND)qt5_window->winId();
+//    ShowWindow(hwndId, SW_HIDE);
+//    SetWindowLong(hwndId, GWL_STYLE, WS_OVERLAPPED | WS_CLIPSIBLINGS | WS_VISIBLE | WS_POPUP);
+//    SetWindowLong(hwndId, GWL_EXSTYLE, WS_EX_LEFT | WS_EX_LTRREADING | WS_EX_RIGHTSCROLLBAR);
+//    ShowWindow(hwndId, SW_SHOW);
+
     /* show the window */
     qt5_window->show();
 
