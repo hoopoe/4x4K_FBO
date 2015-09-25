@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
     format.setDepthBufferBits(24);
     format.setStencilBufferBits(8);
     format.setFullscreen(false);
-    format.setVSync(true);
+    format.setVSync(false);
     //format.setMultisampleSamples(16);
     //format.setMultisample(true);
 
@@ -50,10 +50,10 @@ int main(int argc, char *argv[])
     /* Initialize the OpenGL context and window properties */
     int x = 0;
     int y = 0;
-//    int width = 512;
-//    int height= 512;
-    int width = rttWidth;
-    int height= rttHeight;
+    int width = 512;
+    int height= 512;
+//    int width = rttWidth;
+//    int height= rttHeight;
     qt5_window->initQt5Widget( "Visualization Library on Qt5 - RTT Test", format, NULL, x, y, width, height );
 //    qt5_window->setContinuousUpdate(false);
 
